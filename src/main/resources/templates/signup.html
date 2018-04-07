@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<!--<head th:replace="common/header :: navbar" />-->
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Bayilik Başvuru Formu</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form class="form-horizontal" method="post" th:action="@{/signup}">
+
+                <div class="form-group">
+                    <label for="firstName" class="cols-sm-2 control-label">İsim</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:value="${user.firstName}" id="firstName" name="firstName" roleId="firstname"  placeholder="İsminizi Giriniz" required="required"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="cols-sm-2 control-label">Soyisim</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:value="${user.lastName}" id="lastName" name="lastName" roleId="lastName"  placeholder="Soyisminizi Giriniz" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="TC" class="cols-sm-2 control-label">TC Kimlik NO</label><span class="bg-danger pull-right" th:if="${usernameExists}">Bu kullanici adi zaten kullanılıyor.</span>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:value="${user.TC}" id="TC" name="TC" roleId="TC"  placeholder="Tc no Giriniz" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="adres">Adres:</label>
+                    <span class="input-group-addon"><i class="fa fa-reorder fa" aria-hidden="true"></i></span>
+	                    <textarea th:value="${user.address}" class="form-control" name="address" id="address" placeholder="Adresinizi Giriniz" ></textarea>
+	                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="cols-sm-2 control-label">Telefon</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:value="${user.phone}" id="phone" name="phone" roleId="phone"  placeholder="xxxx-xxx-xxxx" required="required"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Email</label><span class="bg-danger pull-right" th:if="${emailExists}">Bu email adresi zaten kullanılıyor!</span>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" th:value="${user.email}" id="email" name="email" roleId="email"  placeholder="Email adresinizi Giriniz" required="required"/>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateString">Doğum Tarihinizi Giriniz:</label>
+                    <div class="input-append date form_datetime input-group" data-date="2016-10-21T15:25:00Z">
+                        <input class="form-control" type="text" value="" readonly="readonly"
+                               th:value="${dateString}" name="dateString"
+                               id="dateString" required="required"/>
+                        
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+				
+				<div class="form-group">
+                    <label for="question">Perakende Ticareti ile Uğraştınız mı?</label>
+                    <select class="form-control" th:value="${user.question}" name="question" id="question" >
+						<option disabled="disabled" selected="selected" > 
+                        </option>
+                        <option>EVET</option>
+                        <option>HAYIR</option>
+                       
+                    </select>
+                </div>
+                
+                 <div class="form-group">
+                    <label for="ek">LOKUMCU BABA'yı Tercih Etme Sebebiniz Nedir?</label>
+	                    <textarea th:value="${user.reason}" class="form-control" name="reason" id="reason" placeholder="Sebeplerinizi buraya yazabilirsiniz." ></textarea>
+	                </div>
+                
+				  
+                <div class="form-group">
+                    <label for="location">Hangi il için LOKUMCU BABA işletmeciliği düşünüyorsunuz? </label>
+                    <select class="form-control" th:value="${user.location}" name="location" id="location">
+                    
+                        <option disabled="disabled" selected="selected" > İlinizi seçiniz!</option>
+                        
+                        <option>İSTANBUL</option>
+                        <option>ANKARA</option>
+                        <option>İZMİR</option>
+                        <option>GAZİANTEP</option>
+                    </select>
+                </div>
+                
+                
+					<div class="form-group">
+                    <label>Yatırım Miktarınız Nedir ? </label>
+                    <span class="input-group-addon">Miktar TL</span>
+                    <span class="input-group-addon"><i class="fa fa-try fa" aria-hidden="true"></i></span>
+                    <input th:value="${user.amount}" type="text"  name="amount" id="amount" class="form-control" placeholder="Şifrenizi Giriniz" />
+                </div>
+				
+                <div class="form-group">
+                    <label for="ek">Eklemek İstedikleriniz:</label>
+                    <span class="input-group-addon"><i class="fa fa-info fa" aria-hidden="true"></i></span>
+	                    <textarea th:value="${user.note}" class="form-control" name="note" id="note" placeholder="Eklemek istedikleriniz" ></textarea>
+	                </div>
+                
+                
+
+               
+
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">GÖNDER !</button>
+                </div>
+                
+                <hr />
+                
+				
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="common/header :: body-bottom-scripts" />
+
+</body>
+</html>

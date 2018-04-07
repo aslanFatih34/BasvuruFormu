@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head>
+<body>
+<!-- Login Section -->
+    
+    <div class="container">
+        <div class="row ">
+            
+                
+                
+                <form class="form-signin" th:action="@{/index}" method="post">
+                
+                    <h2 class="form-signin-heading" align="center">Bayilik Başvuru Formuna Hoşgeldiniz.</h2>
+                   
+                    <font size="4">--Formu Eksiksiz ve Doğru Doldurunuz.--</font><br></br>
+                   	<font size="4">--Formunuz doldurduktan sonra Gönder <br></br>tuşuna bastığınızda başvurunuz iletilecektir.</font><br></br>
+                    <font size="4">--Başvuru Formuna Gitmek için Tıklayınız.--</font><br></br>
+                    
+                </form>
+                
+                <hr />
+                
+                <div class="form-group ">
+                <div class="main-center ">
+                    <a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/signup}">Tıkla!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>
